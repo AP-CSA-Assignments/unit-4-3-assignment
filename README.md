@@ -1,4 +1,4 @@
-# unit-4-2-assignment
+# unit-4-3-assignment
 
 ## Git Config
 ```
@@ -23,80 +23,114 @@ After you compile the shape classes, you only need to compile and run `Main.java
 # Instructions  
 
 ## Problem 1
-Ask the user for two numbers. Print only the odd numbers between them. You should also print the two numbers if they are odd.  You may assume that the first number entered is less than the second number entered.
+Use a for loop to print the odd numbers between 1 and 25 inclusive.
+
+## Problem 2
+Use a for loop to print all of the numbers from 17 to 73 (inclusive) with 10 numbers on each line (the last line will have less than 10 numbers). Print one space between each number.
+
+Hint - think about what values would be at the end of each line and what they have in common (think about modular division). You can then add an if block inside your loop which prints a new line when one of these numbers is encountered.
+
+## Problem 3
+Input an int between 0 and 50 and print the numbers between it and 50, including the number itself and the number 50. If the number is less than or equal to 0, or greater than or equal to 50, print "error". Print 5 numbers per line. The last line may or may not have 5 numbers.
+
+Hint - use modular division to determine where you need to add a line break.
 
 Sample Run 1:
 ```
-Enter two numbers:
-2
-11
-
-3 5 7 9 11
+Enter a number between 0 and 50:
+23
+23 24 25 26 27 
+28 29 30 31 32 
+33 34 35 36 37 
+38 39 40 41 42 
+43 44 45 46 47 
+48 49 50
 ```
 Sample Run 2:
 ```
-Enter two numbers:
-10
-44
-
-11 13 15 17 19 21 23 25 27 29 31 33 35 37 39 41 43
+Enter a number between 0 and 50:
+-2
+error
 ```
 
-## Problem 2
-Write a program which takes a positive int input from the user, then prints the digits of that number in their places. You should separate the digits using spaces of line breaks so they appear individually.
+## Problem 4
+Input an int greater than 0 and print every multiple of 3 between it and 0 inclusive in descending order. If the number is not greater than 0 print "error". Print all numbers on one line with single spaces in between.
 
-To start, first write a program that prints every digit of a number.
+Hint - use modular division to determine which numbers to print (you could check each number or just find the nearest multiple of 3 below/equal to the input and proceed from there).
 
-Sample run:
+Sample Run 1:
 ```
 Enter a positive integer:
-> 2587
-7
-80
-500
-2000
+25
+24 21 18 15 12 9 6 3 0 
+```
+Sample Run 2:
+```
+Enter a positive integer:
+-2
+error
 ```
 
 ## Sample Solutions
 ```java
 // Problem 1
-Scanner sc = new Scanner(System.in);
-int a;
-int b;
-
-System.out.println("Enter two numbers:");
-a = sc.nextInt();
-b = sc.nextInt();
-
-while (a <= b)
+for (int i = 1; i <= 25; i+=2)
 {
-  if (a % 2 == 1)
-  {
-    System.out.print(a + " ");
-  }
-  a++;
+  System.out.println(i);
 }
 
 // Problem 2
-Scanner sc = new Scanner(System.in);
-int N;
-int degree = 0;
-
-System.out.print("Enter a positive integer:\n> ");
-N = sc.nextInt();
-
-while (N > 0)
+for (int i = 17; i <= 73; i++)
 {
-  // These two lines are the
-  // "print every digit" algorithm
-  int last_digit = N % 10;
-  N /= 10;
+  System.out.print(i + " ");
 
-  // note that pow always returns a double, so it needs
-  // to be stored in a double
-  double place_value = Math.pow(10, degree);
-  System.out.println(last_digit * place_value);
-  
-  degree++;  // 1's place → 10's place; 10's place → 100's place, and so on
+  if (i % 10 == 6)
+  {
+    System.out.println();
+  }
+}
+
+// Problem 3
+Scanner sc = new Scanner(System.in);
+int n;
+
+System.out.println("Enter a number between 0 and 50:");
+n = sc.nextInt();
+
+if (!(0 <= n && n <= 50))
+{
+  System.out.println("error");
+}
+else
+{
+  for (int i = n; i <= 50; i++)
+  {
+    System.out.print(i + " ");
+    if (i % 5 == (n + 4) % 5)
+    {
+      System.out.println();
+    }
+  }
+}
+
+// Problem 4
+Scanner sc = new Scanner(System.in);
+int n;
+
+System.out.println("Enter a positive integer:");
+n = sc.nextInt();
+if (n > 0)
+{
+  // Optional - decrease n to the nearest multiple of 3
+  n -= (n % 3);	// Equivalent to n = n - (n % 3)
+
+  for (int i = n; i >= 0; i -= 3)
+  {
+    System.out.print(i + " ");
+  }
+}
+else
+{
+  System.out.println("error");
 }
 ```
